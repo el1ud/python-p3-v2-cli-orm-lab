@@ -12,57 +12,55 @@ def exit_program():
 def list_departments():
     departments = Department.get_all()
     for department in departments:
-        print(department)
+        print (department)
 
 
 def find_department_by_name():
-    name = input("Enter the department's name: ")
+    name = input("Enter the departments name: ")
     department = Department.find_by_name(name)
-    print(department) if department else print(
-        f'Department {name} not found')
+    print (department) if department else print (f'Department {name} not found')
 
 
 def find_department_by_id():
-    # use a trailing underscore not to override the built-in id function
-    id_ = input("Enter the department's id: ")
+    id_ = input("Enter the departments id: ")
     department = Department.find_by_id(id_)
-    print(department) if department else print(f'Department {id_} not found')
+    print (department) if department else print (f'Department with id {id_} not found')
 
 
 def create_department():
-    name = input("Enter the department's name: ")
-    location = input("Enter the department's location: ")
+    name =input("Enter the department name: ")
+    location = input("Enter the department location: ")
     try:
         department = Department.create(name, location)
         print(f'Success: {department}')
     except Exception as exc:
-        print("Error creating department: ", exc)
+        print('Error creating department: ', exc)
 
 
 def update_department():
-    id_ = input("Enter the department's id: ")
+    id_ = input("Enter the departments id: ")
     if department := Department.find_by_id(id_):
         try:
-            name = input("Enter the department's new name: ")
+            name = input("Enter the department new name: ")
             department.name = name
-            location = input("Enter the department's new location: ")
+            location = input("Enter the department new location: ")
             department.location = location
 
             department.update()
             print(f'Success: {department}')
         except Exception as exc:
-            print("Error updating department: ", exc)
+                print('Error updating department: ', exc)
     else:
-        print(f'Department {id_} not found')
+        print(f'Department with id {id_} not found')
 
 
 def delete_department():
-    id_ = input("Enter the department's id: ")
+    id_ = input("Enter the departments id: ")
     if department := Department.find_by_id(id_):
         department.delete()
-        print(f'Department {id_} deleted')
+        print(f'Department {department.name} deleted')
     else:
-        print(f'Department {id_} not found')
+        print(f'Department with id {id_} not found')
 
 
 # You'll implement the employee functions in the lab
